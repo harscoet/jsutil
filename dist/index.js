@@ -123,21 +123,31 @@ function isPlainObject(obj) {
     return Object.prototype.toString.call(obj) === '[object Object]';
 }
 exports.isPlainObject = isPlainObject;
-function deepForEachLoop(_obj, callback, options, parent) {
-    for (var keys = Object.keys(_obj), i = 0; i < keys.length; ++i) {
+function toBoolean(value, emptyStringIsTrue) {
+    if (emptyStringIsTrue && value === '') {
+        return true;
+    }
+    if (value === '0' || value === 'false' || value === 'null') {
+        return false;
+    }
+    return Boolean(value);
+}
+exports.toBoolean = toBoolean;
+function deepForEachLoop(obj, callback, options, parent) {
+    for (var keys = Object.keys(obj), i = 0; i < keys.length; ++i) {
         var key = keys[i];
-        var value = _obj[key];
+        var value = obj[key];
         var isSearchKey = options.key && key === options.key;
         var isObject = isPlainObject(value);
         var isArray = Array.isArray(value);
         if (!isSearchKey && (isObject || isArray)) {
             if ((isObject && options.callbackObject) || (isArray && options.callbackArray)) {
-                callback(value, key, _obj);
+                callback(value, key, obj);
             }
-            return deepForEachLoop(value, callback, options, _obj);
+            deepForEachLoop(value, callback, options, obj);
         }
-        if (!options.key || isSearchKey) {
-            return callback(value, key, _obj);
+        else if (!options.key || isSearchKey) {
+            callback(value, key, obj);
         }
     }
 }
