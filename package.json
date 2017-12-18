@@ -4,7 +4,7 @@
   "description": "",
   "author": "Donovan Harscoet <donovan.harscoet@gmail.com> (https://github.com/harscoet/)",
   "license": "ISC",
-  "main": "index.js",
+  "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "start": "tsc --watch",
