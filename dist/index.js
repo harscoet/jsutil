@@ -65,7 +65,7 @@ function paginateArray(arr, limit, page) {
 }
 exports.paginateArray = paginateArray;
 function getPageNumber(total, limit) {
-    return Math.floor(total / limit);
+    return Math.ceil(total / limit);
 }
 exports.getPageNumber = getPageNumber;
 function padZeros(val, len) {
@@ -123,6 +123,16 @@ function isPlainObject(obj) {
     return Object.prototype.toString.call(obj) === '[object Object]';
 }
 exports.isPlainObject = isPlainObject;
+function toBoolean(value, emptyStringIsTrue) {
+    if (emptyStringIsTrue && value === '') {
+        return true;
+    }
+    if (value === '0' || value === 'false' || value === 'null') {
+        return false;
+    }
+    return Boolean(value);
+}
+exports.toBoolean = toBoolean;
 function deepForEachLoop(_obj, callback, options, parent) {
     for (var keys = Object.keys(_obj), i = 0; i < keys.length; ++i) {
         var key = keys[i];

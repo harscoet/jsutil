@@ -73,7 +73,7 @@ export function paginateArray<T>(arr: T[], limit: number, page: number): T[] {
 }
 
 export function getPageNumber(total: number, limit: number) {
-  return Math.floor(total / limit);
+  return Math.ceil(total / limit);
 }
 
 export function padZeros(val: string|number, len: number) {
