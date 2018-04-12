@@ -152,25 +152,23 @@ export function toBoolean(value: string|number|boolean, emptyStringIsTrue?: bool
   return Boolean(value);
 }
 
-function deepForEachLoop(_obj, callback?: DeepForEach.Callback, options?: DeepForEach.Options, parent?) {
-  for (let keys = Object.keys(_obj), i = 0; i < keys.length; ++i) {
+function deepForEachLoop(obj, callback?: DeepForEach.Callback, options?: DeepForEach.Options, parent?) {
+  for (let keys = Object.keys(obj), i = 0; i < keys.length; ++i) {
     const key = keys[i];
-    const value = _obj[key];
+    const value = obj[key];
     const isSearchKey = options.key && key === options.key;
     const isObject = isPlainObject(value);
     const isArray = Array.isArray(value);
 
     if (!isSearchKey && (isObject || isArray)) {
       if ((isObject && options.callbackObject) || (isArray && options.callbackArray)) {
-        callback(value, key, _obj);
+        callback(value, key, obj);
       }
 
-      return deepForEachLoop(value, callback, options, _obj);
-    }
-
-    if (!options.key || isSearchKey) {
-      return callback(value, key, _obj);
-    }
+      deepForEachLoop(value, callback, options, obj);
+    } else if (!options.key || isSearchKey) {
+      callback(value, key, obj);
+    }    
   }
 }
 

@@ -13,7 +13,7 @@ export declare function binaryToDecimal(data: string): string;
 export declare function stringifyQuery(obj: any, prefix?: any): string;
 export declare function isPlainObject(obj: any): boolean;
 export declare function toBoolean(value: string | number | boolean, emptyStringIsTrue?: boolean): boolean;
-export declare function deepForEach(obj: any, callback: DeepForEach.Callback, options?: DeepForEach.Options): any;
+export declare function deepForEach(obj: any, callback: DeepForEach.Callback, options?: DeepForEach.Options): void;
 export declare namespace DeepForEach {
     type Callback = (value, key: string, object?) => void;
     interface Options {
