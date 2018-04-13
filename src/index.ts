@@ -168,12 +168,20 @@ function deepForEachLoop(obj, callback?: DeepForEach.Callback, options?: DeepFor
       deepForEachLoop(value, callback, options, obj);
     } else if (!options.key || isSearchKey) {
       callback(value, key, obj);
-    }    
+    }
   }
 }
 
 export function deepForEach(obj, callback: DeepForEach.Callback, options: DeepForEach.Options = {}) {
   return deepForEachLoop(obj, callback, options);
+}
+
+export function createFilter(state: boolean|string, condition: (state?: boolean|string) => boolean, isReversed?: boolean): boolean {
+  if (isNil(state) || state === '') {
+    return true;
+  }
+
+  return isReversed || state === false ? !condition(state) : condition(state);
 }
 
 export namespace DeepForEach {

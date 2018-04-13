@@ -156,4 +156,11 @@ function deepForEach(obj, callback, options) {
     return deepForEachLoop(obj, callback, options);
 }
 exports.deepForEach = deepForEach;
+function createFilter(state, condition, isReversed) {
+    if (isNil(state) || state === '') {
+        return true;
+    }
+    return isReversed || state === false ? !condition(state) : condition(state);
+}
+exports.createFilter = createFilter;
 //# sourceMappingURL=index.js.map
