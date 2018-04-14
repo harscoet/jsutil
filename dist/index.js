@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var ID_RANDOM_VALUES = 'abcdefghijklmnopqrstuvwxyz0123456789';
 function getFrom(str, startToken, endToken) {
     var startTokenLength = startToken.length;
     var start = str.indexOf(startToken) + startTokenLength;
@@ -163,4 +164,17 @@ function createFilter(state, condition, isReversed) {
     return isReversed || state === false ? !condition(state) : condition(state);
 }
 exports.createFilter = createFilter;
+function rand(min, max) {
+    return Math.floor(Math.random() * max) + min;
+}
+exports.rand = rand;
+function generateId(size) {
+    if (size === void 0) { size = 8; }
+    var id = '';
+    for (var i = 0; i < size; i++) {
+        id += ID_RANDOM_VALUES.charAt(Math.floor(Math.random() * ID_RANDOM_VALUES.length));
+    }
+    return id;
+}
+exports.generateId = generateId;
 //# sourceMappingURL=index.js.map

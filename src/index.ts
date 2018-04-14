@@ -1,3 +1,5 @@
+const ID_RANDOM_VALUES = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
 export function getFrom(str: string, startToken: string, endToken: string): string {
   const startTokenLength = startToken.length;
   const start = str.indexOf(startToken) + startTokenLength;
@@ -182,6 +184,20 @@ export function createFilter(state: boolean|string, condition: (state?: boolean|
   }
 
   return isReversed || state === false ? !condition(state) : condition(state);
+}
+
+export function rand(min: number, max: number): number {
+  return Math.floor(Math.random() * max) + min;
+}
+
+export function generateId(size: number = 8): string {
+  let id = '';
+
+  for (let i = 0; i < size; i++) {
+    id += ID_RANDOM_VALUES.charAt(Math.floor(Math.random() * ID_RANDOM_VALUES.length));
+  }
+
+  return id;
 }
 
 export namespace DeepForEach {
