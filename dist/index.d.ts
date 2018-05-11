@@ -1,8 +1,6 @@
 export declare function getFrom(str: string, startToken: string, endToken: string): string;
 export declare function isNil<T>(val: T): boolean;
-export declare function arrify<T>(arr: void | {
-    [key: string]: T;
-} | T | T[]): T[];
+export declare function arrify<T>(value: T | T[]): T[];
 export declare function checkArrayParam(value: string, options: string[], name?: string): void;
 export declare function getOffset(limit?: number, page?: number, offset?: number): number;
 export declare function removeQueryUrl(val: string): string;

@@ -19,23 +19,11 @@ function isNil(val) {
     return val === null || val === undefined;
 }
 exports.isNil = isNil;
-function arrify(arr) {
-    if (isNil(arr)) {
+function arrify(value) {
+    if (isNil(value)) {
         return [];
     }
-    if (Array.isArray(arr)) {
-        return arr;
-    }
-    if (typeof arr === 'object') {
-        var values = [];
-        for (var i in arr) {
-            if (arr.hasOwnProperty(i)) {
-                values.push(arr[i]);
-            }
-        }
-        return values;
-    }
-    return [arr];
+    return Array.isArray(value) ? value : [value];
 }
 exports.arrify = arrify;
 function checkArrayParam(value, options, name) {
