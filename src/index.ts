@@ -22,28 +22,12 @@ export function isNil<T>(val: T): boolean {
   return val === null || val === undefined;
 }
 
-export function arrify<T>(arr: void | { [key: string]: T } | T | T[]): T[] {
-  if (isNil(arr)) {
+export function arrify<T>(value: T|T[]): T[] {
+  if (isNil(value)) {
     return [];
   }
 
-  if (Array.isArray(arr)) {
-    return arr;
-  }
-
-  if (typeof arr === 'object') {
-    const values = [];
-
-    for (const i in (arr as any)) {
-      if (arr.hasOwnProperty(i)) {
-        values.push(arr[i]);
-      }
-    }
-
-    return values as T[];
-  }
-
-  return [arr] as any as T[];
+  return Array.isArray(value) ? value : [value];
 }
 
 export function checkArrayParam(value: string, options: string[], name: string = '') {
